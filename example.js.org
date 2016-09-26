@@ -1,0 +1,125 @@
+var canvas = document.getElementById('canvas');
+var context = canvas.getContext('2d');
+
+
+context.lineFoin = 'round';
+context.lineWidth = 30;
+
+
+//画面を塗りつぶす
+context.fillStyle = '#000000';
+context.fillRect( 0, 0, canvas.width, canvas.height );
+
+//白鍵
+context.fillStyle = '#ffffff';
+context.fillRect( 10, 60, 480, 240 );
+
+//境界線
+context.fillStyle = '#000000';
+var boundaryLine = 62.5;
+for (var i = 1; i < 8; i++) {
+    context.fillRect( boundaryLine * i , 50, 1, 250 );
+  }
+
+//黒鍵
+context.fillStyle = '#000000';
+context.fillRect( 54.5, 50, 20, 140 );
+context.fillRect( 116, 50, 20, 140 );
+context.fillRect( 242, 50, 20, 140 );
+context.fillRect( 304, 50, 20, 140 );
+context.fillRect( 367, 50, 20, 140 );
+
+
+//マウスイベント
+var hoge = false;
+
+//マウスの座標
+var mousX, mousY;
+//クリックダウン
+document.addEventListener('mousedown', test);
+function test(e) {
+  context.fillStyle = '#4e4e4e';
+  if ( hoge == true ) {
+    context.fillRect( 116, 50, 20, 140 );
+  }
+}
+
+//クリックアップ
+document.addEventListener('mouseup', test2);
+function test2(e) {
+  context.fillStyle = '#000000';
+  context.fillRect( 116, 50, 20, 140 );
+}
+
+
+//マウスの座標を得とく
+document.addEventListener('mousemove', test3);
+function test3(e) {
+
+  mousX = e.clientX;
+  mousY = e.clientY;
+
+  //画面を塗りつぶす
+//  context.fillStyle = '#000000';
+//  context.fillRect( 0, 0, canvas.width, 60 );
+
+  //文字の色とフォント指定
+  context.fillStyle = '#ff0000';
+  context.font = '24px Heletica'
+  context.fillText( hoge, 260, 30);
+  //X軸
+  context.fillText( "X =", 10, 50);
+  context.fillText( mousX, 55, 50);
+  //Y軸
+  context.fillText( "Y =", 110, 50);
+  context.fillText( mousY, 160, 50);
+
+  if ( mousX >= 116 &&
+       mousY >= 50 &&
+       mousX <= 20 &&
+       mousY <= 140
+     ){
+       hoge = true;
+  }
+
+}
+
+//座標によって何かする
+function mousZahyou(){
+
+}
+
+
+
+
+/*
+function Audio() {
+
+  var contextClass = (window.AudioContext ||
+                      window.webkitAudioContext ||
+                      window.mozAudioContext ||
+                      window.oAudioContext ||
+                      window.msAudioContext
+                    );
+
+  if ( contextClass ) {
+    //Web Audio APIが利用可能
+    var context = new contextClass();
+  } else {
+    //Web Audio APIは利用不可能　ユーザーに対してサポートされているブラウザーを使うことを求める
+  }
+
+  //ソースを作成する
+  var source = context.createBufferSource();
+
+  //ゲイン・ノードを作成する
+  var gain = context.connect(gain);
+
+  //ソースをフィルタへ、フィルタをディスティネーションへつなぐ
+  source.connect(gain);
+  gain.connect(context.destination);
+
+}
+*/
+
+//Audio();
